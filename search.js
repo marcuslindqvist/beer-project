@@ -5,7 +5,6 @@ const mainElement = document.querySelector("div.main");
 formElement.addEventListener("submit", onSubmit);
 
 function onSubmit(evt) {
-  debugger;
   const searchString = evt.target[0].value;
   const url = `${api}?beer_name=${searchString}`;
   console.log(url);
