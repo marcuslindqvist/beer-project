@@ -1,3 +1,5 @@
+debugger;
+
 const mainElement = document.querySelector("main");
 const searchParams = new URLSearchParams(window.location.search);
 const api = "https://api.punkapi.com/v2/beers";
@@ -7,7 +9,6 @@ console.log(id);
 getData(url, render);
 
 function getData(url, callback) {
-  debugger;
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
