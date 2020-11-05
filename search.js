@@ -11,7 +11,7 @@ function onSubmit(evt) {
   getData(url, render);
   evt.preventDefault();
 }
-
+debugger;
 function getData(url, callback) {
   fetch(url)
     .then((res) => res.json())
@@ -37,6 +37,6 @@ function render(data) {
 
 function onUlClicked(evt) {
   const id = evt.target.getAttribute("name");
-  const url = `myView.html?name=${id}`;
+  const url = `info.html?name=${id}`;
   document.location.href = url;
 }
