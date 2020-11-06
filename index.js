@@ -2,7 +2,7 @@ const api = "https://api.punkapi.com/v2/beers";
 const formElement = document.querySelector("form");
 const mainElement = document.querySelector("div.main");
 
-formElement.addEventListener("submit", onSubmit);
+//formElement.addEventListener("submit", onSubmit);
 
 function getData(url, callback) {
   fetch(url)

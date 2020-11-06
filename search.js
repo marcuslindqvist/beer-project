@@ -43,13 +43,14 @@ function render(data) {
   }
   mainElement.appendChild(ulElement);
 }
-
+//funktion för klick på list-item. skapar upp url som skickar till info-sidan
 function onUlClicked(evt) {
   const id = evt.target.getAttribute("name");
   const url = `info.html?name=${id}`;
   document.location.href = url;
 }
 
+//bläddra sida bakåt
 previous.onclick = function (evt) {
   if (currentPage !== 1) {
     url = api + (currentPage - 1) + urlAdd;
@@ -59,9 +60,10 @@ previous.onclick = function (evt) {
   }
 };
 
+//bläddra sida framåt
 next.onclick = function (evt) {
-  debugger;
   let ul = document.querySelector("body > div > section > ul");
+  //förhindrar att man bläddrar förbi sista sidan
   if (ul.childElementCount == 10) {
     url = api + (currentPage + 1) + urlAdd;
     getData(url, render);
