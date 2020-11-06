@@ -1,17 +1,22 @@
-const api = "https://api.punkapi.com/v2/beers";
+const api = "https://api.punkapi.com/v2/beers?page=";
+let currentPage = 1;
+let url;
+let urlAdd;
+let searchString;
 const formElement = document.querySelector("form");
-const mainElement = document.querySelector("div.main");
-
+const mainElement = document.querySelector("section.main");
+const previous = document.querySelector("#prev");
+const next = document.querySelector("#next");
 formElement.addEventListener("submit", onSubmit);
 
 function onSubmit(evt) {
-  const searchString = evt.target[0].value;
-  const url = `${api}?beer_name=${searchString}`;
-  console.log(url);
+  searchString = evt.target[0].value;
+  urlAdd = `&per_page=10&beer_name=${searchString}`;
+  url = api + currentPage + urlAdd;
   getData(url, render);
   evt.preventDefault();
 }
-debugger;
+
 function getData(url, callback) {
   fetch(url)
     .then((res) => res.json())
@@ -22,6 +27,10 @@ function getData(url, callback) {
 }
 
 function render(data) {
+  while (mainElement.firstChild) {
+    mainElement.removeChild(mainElement.firstChild);
+  }
+
   const ulElement = document.createElement("ul");
   ulElement.addEventListener("click", onUlClicked);
   for (let i = 0; i < data.length; i++) {
@@ -40,3 +49,23 @@ function onUlClicked(evt) {
   const url = `info.html?name=${id}`;
   document.location.href = url;
 }
+
+previous.onclick = function (evt) {
+  if (currentPage !== 1) {
+    url = api + (currentPage - 1) + urlAdd;
+    getData(url, render);
+    evt.preventDefault();
+    currentPage--;
+  }
+};
+
+next.onclick = function (evt) {
+  debugger;
+  let ul = document.querySelector("body > div > section > ul");
+  if (ul.childElementCount == 10) {
+    url = api + (currentPage + 1) + urlAdd;
+    getData(url, render);
+    evt.preventDefault();
+    currentPage++;
+  }
+};
