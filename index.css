@@ -74,19 +74,24 @@ div.tabs{
     padding-right: 20px;
     text-align: center;
     writing-mode: vertical-rl;
-    text-orientation: upright;
+    text-orientation: sideways;
     height: 150px;
     width: 50px;
-    border-top-right-radius: 5px;
-    border-bottom-right-radius: 5px;
+    border-top-right-radius: 10px;
+    border-bottom-right-radius: 10px;
 }
 .tabs .indexTab{
     margin-top: 140px;
     background-color: white;
+    z-index: 10;
 }
 .searchTab{
     background-color: #8BE3FF;
+    margin-top: -30px;
+    z-index: 8;
 }
 .infoTab{
     background-color: #FFCACA;
+    margin-top: -30px;
+    z-index: 6;
 }
