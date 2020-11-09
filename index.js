@@ -8,11 +8,12 @@ let beerInfoImage = document.querySelector(
 );
 let moreInfoTag = document.querySelector("p.beer-info-more");
 let beerID;
-debugger;
 
 onBtn.addEventListener("click", randomButton);
 
 moreInfoTag.addEventListener("click", moreInfoClicked);
+
+getData(api, renderBeerInfo);
 
 function randomButton() {
   getData(api, renderBeerInfo);
@@ -42,6 +43,7 @@ function renderBeerInfo(data) {
 }
 
 function moreInfoClicked(evt) {
+  debugger;
   const url = `info.html?name=${beerID}`;
   document.location.href = url;
 }

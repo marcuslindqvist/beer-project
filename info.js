@@ -31,3 +31,61 @@ function render(data) {
   mainElement.appendChild(h1Tag);
   mainElement.appendChild(pTag);
 }
+/*
+const page = `https://api.punkapi.com/v2/beers/1`;
+de
+let sectionElement = document.querySelector("main");
+getData(page, render);
+function getData(url, callback) {​​​​​
+  
+    fetch(url)
+    .then(res => res.json())
+    .then(data => {​​​​​
+      
+        callback(data);
+    }​​​​​)
+        
+    .catch(error => console.log(error));
+}​​​​​;
+
+
+function render(beer) {​​​​​
+   
+    const beer = data[0];
+    const description = beer.description;
+    const imgUrl = beer.image_url;
+    const abv = beer.abv;
+    const volume = beer.volume;
+    const ingridiens = beer.ingredients;
+    const foodPairing = beer.foodPairing;
+    const brewersTips = beer.brewersTips;
+ 
+    for (const p in beer) {​​​​​
+let valueOfProperty = beer[p];
+if
+(
+    
+    p =="name"
+    || p == "_proto_"
+    || typeof valueOfProperty == "object"
+    
+        
+){​​​​​
+    continue;
+}​​​​​  
+let str = `${​​​​​p}​​​​​: ${​​​​​valueOfProperty}​​​​​`
+const pElement = document.createElement("p");
+const pTextnode = document.createTextNode(str);
+pElement.appendChild(pTextnode)
+sectionElement.appendChild(pElement);
+}​​​​​;
+
+ 
+const paragraf = document.getElementbyId("myText");
+const button = document.getElementById("myButton");
+button.addEventListener("click")
+function changeText() {​​​​​
+alert("you click a button");
+}​​​​​
+
+*/
