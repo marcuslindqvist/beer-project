@@ -1,91 +1,89 @@
-debugger;
-
-const mainElement = document.querySelector("main");
+const infoHolder = document.querySelector("section.info-paragraphs");
 const searchParams = new URLSearchParams(window.location.search);
 const api = "https://api.punkapi.com/v2/beers";
 const id = searchParams.get("name");
-const url = `${api}/${id}`;
-console.log(id);
-getData(url, render);
+const page = `${api}/${id}`;
 
-function getData(url, callback) {
-  fetch(url)
-    .then((res) => res.json())
-    .then((data) => {
-      callback(data);
-    })
-    .catch((error) => console.log(error));
+//getData(page, control);
+
+class Beer {
+  constructor(öl) {
+    this.Namn = öl.name;
+    this.Beskrivning = öl.description;
+    this.Bild_url = öl.image_url;
+    this.Alkoholhalt = öl.abv;
+    this.Volym = öl.volume.value + " " + öl.volume.unit;
+    this.Humle = this.concatObj(öl.ingredients.hops);
+    this.Malt = this.concatObj(öl.ingredients.malt);
+    this.Jäst = öl.ingredients.yeast;
+    this.Mat_tips = this.concatArr(öl.food_pairing);
+    this.Brygg_tips = öl.brewers_tips + " Av: " + öl.contributed_by;
+  }
+  concatObj(råvara) {
+    let totalRåvara = "";
+    for (const p in råvara) {
+      let amount = råvara[p].amount.value + " " + råvara[p].amount.unit + " ";
+      totalRåvara += amount + råvara[p].name + ", ";
+    }
+    totalRåvara = totalRåvara.slice(0, -2) + ".";
+    return totalRåvara;
+  }
+
+  concatArr(råvara) {
+    let tipsLista = [];
+    råvara.forEach((element) => {
+      tipsLista += element + ", ";
+    });
+    tipsLista = tipsLista.slice(0, -2) + ".";
+    return tipsLista;
+  }
+
+  throw(obj, printer, pCreator, createImg) {
+    for (const property in obj) {
+      printer(obj, property, pCreator, createImg);
+    }
+  }
 }
-
-function render(data) {
-  const beer = data[0];
-  const name = beer.name;
-  const brewers_tips = beer.brewers_tips;
-
-  const h1Tag = document.createElement("h1");
-  const pTag = document.createElement("p");
-
-  h1Tag.textContent = name;
-  pTag.textContent = brewers_tips;
-
-  mainElement.appendChild(h1Tag);
-  mainElement.appendChild(pTag);
-}
-/*
-const page = `https://api.punkapi.com/v2/beers/1`;
-de
-let sectionElement = document.querySelector("main");
-getData(page, render);
-function getData(url, callback) {​​​​​
-  
+class Control {
+  constructor(url) {
     fetch(url)
-    .then(res => res.json())
-    .then(data => {​​​​​
-      
-        callback(data);
-    }​​​​​)
-        
-    .catch(error => console.log(error));
-}​​​​​;
+      .then((res) => res.json())
+      .then((data) => {
+        this.eventMaker(data);
+      })
+      .catch((error) => console.log(error));
+  }
 
+  eventMaker(data) {
+    const beer = new Beer(data[0]);
+    beer.throw(beer, this.printer, this.pCreator, this.createImg);
+  }
 
-function render(beer) {​​​​​
-   
-    const beer = data[0];
-    const description = beer.description;
-    const imgUrl = beer.image_url;
-    const abv = beer.abv;
-    const volume = beer.volume;
-    const ingridiens = beer.ingredients;
-    const foodPairing = beer.foodPairing;
-    const brewersTips = beer.brewersTips;
- 
-    for (const p in beer) {​​​​​
-let valueOfProperty = beer[p];
-if
-(
-    
-    p =="name"
-    || p == "_proto_"
-    || typeof valueOfProperty == "object"
-    
-        
-){​​​​​
-    continue;
-}​​​​​  
-let str = `${​​​​​p}​​​​​: ${​​​​​valueOfProperty}​​​​​`
-const pElement = document.createElement("p");
-const pTextnode = document.createTextNode(str);
-pElement.appendChild(pTextnode)
-sectionElement.appendChild(pElement);
-}​​​​​;
+  printer(objekt, egenskap, pCreator, createImg) {
+    const valueOfProperty = objekt[egenskap];
 
- 
-const paragraf = document.getElementbyId("myText");
-const button = document.getElementById("myButton");
-button.addEventListener("click")
-function changeText() {​​​​​
-alert("you click a button");
-}​​​​​
+    if (egenskap == "Bild_url") {
+      createImg(valueOfProperty);
+    } else {
+      let str = `${egenskap}: ${valueOfProperty}`;
+      pCreator(str);
+    }
+  }
 
-*/
+  pCreator(key) {
+    let pElement = document.createElement("p");
+    let pContent = document.createTextNode(key);
+    pElement.appendChild(pContent);
+    infoHolder.appendChild(pElement);
+  }
+
+  createImg(url) {
+    let imgHolder = document.querySelector(".beer-info-img");
+    let imgElement = document.createElement("img");
+    imgElement.src = url;
+    imgElement.height = 150; //set atributes like height, width mm.
+    imgHolder.appendChild(imgElement);
+  }
+}
+
+let köra = new Control(page);
