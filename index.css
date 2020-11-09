@@ -46,6 +46,9 @@ section.beer-info-box{
     margin-top: 10px;
     align-self: center;
 }
+.beer-info-img > img{
+    width: 100px;
+}
 .info-bottom-box {
     display: flex;
     justify-content: space-between;
@@ -84,6 +87,8 @@ div.tabs{
     margin-top: 140px;
     background-color: white;
     z-index: 10;
+    width: 60px;
+    height: 160px;
 }
 .searchTab{
     background-color: #8BE3FF;

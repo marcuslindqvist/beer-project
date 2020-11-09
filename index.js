@@ -1,9 +1,22 @@
-const api = "https://api.punkapi.com/v2/beers";
-const formElement = document.querySelector("form");
-const mainElement = document.querySelector("div.main");
+let api = "https://api.punkapi.com/v2/beers/random";
+let formElement = document.querySelector("form");
+let mainElement = document.querySelector("div.main");
+let onBtn = document.querySelector("button.random");
+let beerInfoName = document.querySelector("p.beer-info-name");
+let beerInfoImage = document.querySelector(
+  "body > div.wrapper > main > section.beer-info-box > div > img"
+);
+let moreInfoTag = document.querySelector("p.beer-info-more");
+let beerID;
+debugger;
 
-//formElement.addEventListener("submit", onSubmit);
+onBtn.addEventListener("click", randomButton);
 
+moreInfoTag.addEventListener("click", moreInfoClicked);
+
+function randomButton() {
+  getData(api, renderBeerInfo);
+}
 function getData(url, callback) {
   fetch(url)
     .then((res) => res.json())
@@ -13,68 +26,22 @@ function getData(url, callback) {
     .catch((error) => console.log(error));
 }
 
-function render(data) {
-  const ulElement = document.createElement("ul");
-  ulElement.addEventListener("click", onUlClicked);
-  for (let i = 0; i < data.length; i++) {
-    const beer = data[i];
-
-    const liElement = document.createElement("li");
-    liElement.setAttribute("name", beer.id);
-    liElement.textContent = beer.name;
-    ulElement.appendChild(liElement);
-  }
-  mainElement.appendChild(ulElement);
-}
-
-function onUlClicked(evt) {
-  const id = evt.target.getAttribute("name");
-  const url = `info.html?name=${id}`;
-  document.location.href = url;
-}
-
-/*Följande e maddys randomkod
-const rutaElement = document.querySelector(".ruta");
-const api = "https://api.punkapi.com/v2/beers/random";
-const onBtn = document.querySelector("button");
-("image_url"); //hänvisning till kodraden
-
-onBtn.addEventListener("click", getData);
-
-function getData() {
-  while (rutaElement.firstChild) {
-    rutaElement.removeChild(rutaElement.firstChild);
-  }
-  fetch(api)
-    .then((res) => res.json())
-    .then((data) => {
-      render(data);
-
-      console.log(data[0].id);
-    });
-}
-
-function render(data) {
+function renderBeerInfo(data) {
   const beer = data[0];
+  beerID = beer.id;
   const name = beer.name;
-  const image = beer.image_url;
+  let image;
+  beerInfoName.textContent = name;
 
-  const h1Tag = document.createElement("h1");
-  const img = document.createElement("img");
-
-  h1Tag.textContent = name;
-  img.src = image;
-
-  rutaElement.appendChild(h1Tag);
-  rutaElement.appendChild(img);
+  if (beer.image_url) {
+    image = beer.image_url;
+  } else {
+    image = "media/black-beer-flask-lores.png";
+  }
+  beerInfoImage.src = image;
 }
 
-function onUlClicked(evt) {
-  /* function see more för att komma till en annan sida där mer info
- om ölen visas upp
-
-  const id = evt.target.getAttribute("name");
-  const url = `myView.html?name=${id}`;
+function moreInfoClicked(evt) {
+  const url = `info.html?name=${beerID}`;
   document.location.href = url;
 }
-*/

@@ -10,34 +10,58 @@
 </head>
 
 <body>
-    <div class="container">
-        <form>
-            <label for="beerElement">Sök öl:</label><br>
-            <input type="text" name="beerElement"><br>
-            <input type="submit" value="Submit">
-        </form>
+    <div class="wrapper">
 
-        <section class="main">
+        <header>
 
-        </section>
+        </header>
+        <main>
+            <form>
+                <label for="beerElement">Sök öl:</label><br>
+                <input type="text" name="beerElement"><br>
+                <input type="submit" value="Submit">
+            </form>
+            <section class="main">
+                <div class="beer-info-img">
+                    <div class="pages">
+                        <button id="prev">
+                            <-- </button>
+                                <p>
+                                    <span id="current">
 
-        <div class="pages">
-            <button id="prev">
-                <-- </button>
-                    <p>
-                        <span id="current">
+                                    </span>
+                                    /
+                                    <span id="total">
 
-                        </span>
-                        /
-                        <span id="total">
+                                    </span></p>
+                                <button id="next">
+                                    -->
+                                </button>
+                    </div>
+                </div>
+            </section>
 
-                        </span></p>
-                    <button id="next">
-                        -->
-                    </button>
+            <div class="pink-box">
+
+            </div>
+
+        </main>
+
+        <footer>
+
+        </footer>
+    </div>
+    <div class="tabs">
+        <div class="tab indexTab">
+            <a href="index.html">index</p>
+        </div>
+        <div class="tab searchTab">
+            <a href="search.html">search</p>
+        </div>
+        <div class="tab infoTab">
+            <a href="info.html">info</p>
         </div>
     </div>
- 
 </body>
 
 </html>
