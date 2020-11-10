@@ -11,13 +11,20 @@ let ulElement = document.querySelector(
   "body > div.wrapper > main > section > div.beer-info-img > ul"
 );
 let pageCount = document.querySelector("#current");
-pageCount.innerHTML = 1;
+pageCount.innerHTML = "";
 formElement.addEventListener("submit", onSubmit);
 
 function onSubmit(evt) {
   debugger;
-  searchString = evt.target[0].value;
-  urlAdd = `&per_page=10&beer_name=${searchString}`;
+  urlAdd = "&per_page=10";
+  for (i = 0; i < evt.target.length - 1; i++) {
+    if (evt.target[i].value == "") {
+      continue;
+    } else {
+      urlAdd += evt.target[i].alt + evt.target[i].value;
+    }
+  }
+
   url = api + currentPage + urlAdd;
   getData(url, render);
   evt.preventDefault();
@@ -63,7 +70,7 @@ previous.onclick = function (evt) {
     getData(url, render);
     evt.preventDefault();
     currentPage--;
-    pageCount.innerHTML--;
+    pageCount.innerHTML = currentPage;
   }
 };
 
@@ -75,6 +82,6 @@ next.onclick = function (evt) {
     getData(url, render);
     evt.preventDefault();
     currentPage++;
-    pageCount.innerHTML++;
+    pageCount.innerHTML = currentPage;
   }
 };
