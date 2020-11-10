@@ -18,7 +18,18 @@ header {
     margin-bottom: 40px;
     border-radius: 10px;
 }
-
+section.form-container {
+    grid-row: 1;
+    grid-column: 1;
+    z-index: 10;
+}
+form{
+    display: flex;
+    flex-direction: column;
+}
+input{
+    width: 20ch;
+}
 main {
     background-color: #bde6f3;
     display: grid;
@@ -56,6 +67,7 @@ div.pages {
 }
 
 div.pink-box {
+    z-index: 5;
     grid-row: 2/ span 2;
     background-color: #e9d8d8;
     border-radius: 5px;

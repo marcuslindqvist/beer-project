@@ -14,20 +14,41 @@ let pageCount = document.querySelector("#current");
 pageCount.innerHTML = "";
 formElement.addEventListener("submit", onSubmit);
 
-function onSubmit(evt) {
-  debugger;
-  urlAdd = "&per_page=10";
-  for (i = 0; i < evt.target.length - 1; i++) {
-    if (evt.target[i].value == "") {
-      continue;
-    } else {
-      urlAdd += evt.target[i].alt + evt.target[i].value;
-    }
-  }
+let afterDate = document.querySelector("#after-date");
+let beforeDate = document.querySelector("#before-date");
+//beforeDate.addEventListener("click", dateCheck, afterDate);
+//afterDate.addEventListener("click", dateCheck, beforeDate);
 
-  url = api + currentPage + urlAdd;
-  getData(url, render);
-  evt.preventDefault();
+function dateCheck(evt) {
+  debugger;
+  console.log(evt);
+  if (
+    evt.target[3].value > evt.target[4].value ||
+    evt.target[5].value > evt.target[6].value
+  ) {
+    alert("Kolla så siffrorna stämmer");
+    return false;
+  }
+  return true;
+}
+function reverseDate() {}
+
+function onSubmit(evt) {
+  if (dateCheck(evt) !== false) {
+    urlAdd = "&per_page=10";
+    for (i = 0; i < evt.target.length - 1; i++) {
+      if (evt.target[i].value == "") {
+        continue;
+      } else if (i == 3 || i == 4) {
+        //FIXA SÅ MONTH O YEAR KASTAS OM
+      } else {
+        urlAdd += evt.target[i].alt + evt.target[i].value;
+      }
+    }
+    url = api + currentPage + urlAdd;
+    getData(url, render);
+    evt.preventDefault();
+  }
 }
 
 function getData(url, callback) {

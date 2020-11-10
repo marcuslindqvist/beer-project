@@ -16,15 +16,25 @@
 
         </header>
         <main>
-            <form>
-                <label for="beerElement">Sök ölnamn:</label><br>
-                <input type="text" name="beerElement" alt="&beer_name="><br>
-                <label for="hopsElement">Sök hops:</label><br>
-                <input type="text" name="hopsElement" alt="&hops="><br>
-                <label for="maltElement">Sök malt:</label><br>
-                <input type="text" name="maltElement" alt="&malt="><br>
-                <input type="submit" value="Submit">
-            </form>
+            <section class="form-container">
+                <form>
+                    <label for="beerElement">Sök ölnamn:</label>
+                    <input type="text" name="beerElement" alt="&beer_name=">
+                    <label for="hopsElement">Sök hops:</label>
+                    <input type="text" name="hopsElement" alt="&hops=">
+                    <label for="maltElement">Sök malt:</label>
+                    <input type="text" name="maltElement" alt="&malt=">
+                    <label for="brewed-after">Bryggt efter:</label>
+                    <input type="month" id="after-date" name="after-date" alt="&brewed_after=">
+                    <label for="brewed-before">Bryggt innan: </label>
+                    <input type="month" id="before-date" name="before-date" alt="&brewed_before=">
+                    <label for="abv-over">Alkoholhalt över (%):</label>
+                    <input type="number" id="abv-over" name="alkoholhalt" alt="&abv_gt=">
+                    <label for="abv-under">Alkoholhalt under (%):</label>
+                    <input type="number" id="abv-under" name="alkoholhalt" alt="&abv_lt=">
+                    <input type="submit" value="Submit">
+                </form>
+            </section>
             <section class="main">
                 <div class="beer-info-img">
                     <ul>
