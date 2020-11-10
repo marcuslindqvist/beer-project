@@ -8,7 +8,7 @@ div.wrapper{
     grid-column: 2;
 }
 header{
-    background-color: white;
+    background-color: #ECEBEB;
     height: 80px;
     margin-bottom: 40px;
     border-radius: 10px;
@@ -19,7 +19,7 @@ main{
     grid-template-columns: 1fr 1fr;
     grid-template-rows: repeat(3, 150px);
     gap: 50px;
-    padding: 70px;
+    padding: 50px;
     border-radius: 10px;
 }
 section.random-box{
@@ -31,16 +31,17 @@ section.beer-info-box{
     border-radius: 5px;
     background-image: url(media/yellowflask.png);
     background-repeat: no-repeat;
-    background-position: center;
     background-size: 80%;
+    display: flex;
+    flex-direction: column;
+    justify-content: flex-end;
+
 }
 .beer-info-img{
     margin-left: auto;
     margin-right: auto;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-    background-color: white;
     height: 300px;
     width: 70%;
     margin-top: 10px;
@@ -58,7 +59,7 @@ section.beer-info-box{
 
 div.pink-box{
     grid-row: 2/ span 2;
-    background-color: #FFCACA;
+    background-color: #e9d8d8;
     border-radius: 5px;
     background-image: url(media/black-beer-flask-pink-box.png);
     background-repeat: no-repeat;
@@ -91,12 +92,12 @@ div.tabs{
     height: 160px;
 }
 .searchTab{
-    background-color: #8BE3FF;
+    background-color: #bde6f3;
     margin-top: -30px;
     z-index: 8;
 }
 .infoTab{
-    background-color: #FFCACA;
+    background-color: #e9d8d8;
     margin-top: -30px;
     z-index: 6;
 }

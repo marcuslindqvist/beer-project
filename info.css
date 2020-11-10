@@ -14,19 +14,19 @@ div.wrapper {
 }
 
 header {
-    background-color: white;
+    background-color: #ECEBEB;
     height: 80px;
     margin-bottom: 40px;
     border-radius: 10px;
 }
 
 main {
-    background-color: #FFCACA;
+    background-color: #e9d8d8;
     display: grid;
     grid-template-columns: 1fr 1fr;
     grid-template-rows: repeat(3, 150px);
     gap: 50px;
-    padding: 70px;
+    padding: 50px;
     border-radius: 10px;
 }
 section.info-paragraphs{
@@ -41,7 +41,6 @@ section.main {
     border-radius: 5px;
     background-image: url(media/yellowflask.png);
     background-repeat: no-repeat;
-    background-position: center;
     background-size: 80%;
     display: flex;
     justify-content: center;
@@ -75,14 +74,14 @@ div.tabs {
 }
 
 .searchTab {
-    background-color: #8BE3FF;
+    background-color:#bde6f3;
     margin-top: -30px;
     z-index: 12;
  
 }
 
 .infoTab {
-    background-color: #FFCACA;
+    background-color: #e9d8d8;
     margin-top: -30px;
     z-index: 15;
     width: 60px;

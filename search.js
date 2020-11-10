@@ -7,9 +7,15 @@ const formElement = document.querySelector("form");
 const mainElement = document.querySelector("section.main");
 const previous = document.querySelector("#prev");
 const next = document.querySelector("#next");
+let ulElement = document.querySelector(
+  "body > div.wrapper > main > section > div.beer-info-img > ul"
+);
+let pageCount = document.querySelector("#current");
+pageCount.innerHTML = 1;
 formElement.addEventListener("submit", onSubmit);
 
 function onSubmit(evt) {
+  debugger;
   searchString = evt.target[0].value;
   urlAdd = `&per_page=10&beer_name=${searchString}`;
   url = api + currentPage + urlAdd;
@@ -27,12 +33,11 @@ function getData(url, callback) {
 }
 
 function render(data) {
-  while (mainElement.firstChild) {
-    mainElement.removeChild(mainElement.firstChild);
+  while (ulElement.firstChild) {
+    ulElement.removeChild(ulElement.firstChild);
   }
-
-  const ulElement = document.createElement("ul");
   ulElement.addEventListener("click", onUlClicked);
+
   for (let i = 0; i < data.length; i++) {
     const beer = data[i];
 
@@ -43,6 +48,7 @@ function render(data) {
   }
   mainElement.appendChild(ulElement);
 }
+
 //funktion för klick på list-item. skapar upp url som skickar till info-sidan
 function onUlClicked(evt) {
   const id = evt.target.getAttribute("name");
@@ -57,17 +63,18 @@ previous.onclick = function (evt) {
     getData(url, render);
     evt.preventDefault();
     currentPage--;
+    pageCount.innerHTML--;
   }
 };
 
 //bläddra sida framåt
 next.onclick = function (evt) {
-  let ul = document.querySelector("body > div > section > ul");
   //förhindrar att man bläddrar förbi sista sidan
-  if (ul.childElementCount == 10) {
+  if (ulElement.childElementCount == 10) {
     url = api + (currentPage + 1) + urlAdd;
     getData(url, render);
     evt.preventDefault();
     currentPage++;
+    pageCount.innerHTML++;
   }
 };

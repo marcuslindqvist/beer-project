@@ -11,7 +11,7 @@ class Beer {
     this.Namn = öl.name;
     this.Beskrivning = öl.description;
     this.Bild_url = öl.image_url;
-    this.Alkoholhalt = öl.abv;
+    this.Alkoholhalt = öl.abv + " %";
     this.Volym = öl.volume.value + " " + öl.volume.unit;
     this.Humle = this.concatObj(öl.ingredients.hops);
     this.Malt = this.concatObj(öl.ingredients.malt);
@@ -44,6 +44,7 @@ class Beer {
     }
   }
 }
+
 class Control {
   constructor(url) {
     fetch(url)
