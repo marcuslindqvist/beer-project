@@ -2,17 +2,20 @@ body{
     background-color: #ECEBEB;
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
-    grid-template-rows: repeat(7, 150px);
+    grid-template-rows: repeat(7, 200px);
 }
+
 div.wrapper{
     grid-column: 2;
 }
+
 header{
     background-color: #ECEBEB;
     height: 80px;
     margin-bottom: 40px;
     border-radius: 10px;
 }
+
 main{
     background-color: white;
     display: grid;
@@ -22,9 +25,11 @@ main{
     padding: 50px;
     border-radius: 10px;
 }
+
 section.random-box{
     grid-row: 1;
 }
+
 section.beer-info-box{
     grid-row: 1/ span 3;
     grid-column: 2;
@@ -34,9 +39,9 @@ section.beer-info-box{
     background-size: 80%;
     display: flex;
     flex-direction: column;
-    justify-content: flex-end;
-
+    justify-content: center;
 }
+
 .beer-info-img{
     margin-left: auto;
     margin-right: auto;

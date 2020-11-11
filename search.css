@@ -23,7 +23,7 @@ section.form-container {
     grid-column: 1;
     z-index: 10;
 }
-form{
+form {
     display: flex;
     flex-direction: column;
 }
@@ -34,7 +34,7 @@ main {
     background-color: #bde6f3;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    grid-template-rows: repeat(3, 150px);
+    grid-template-rows: repeat(3, 200px);
     gap: 50px;
     padding: 50px;
     border-radius: 10px;

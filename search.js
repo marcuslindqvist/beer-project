@@ -16,23 +16,29 @@ formElement.addEventListener("submit", onSubmit);
 
 let afterDate = document.querySelector("#after-date");
 let beforeDate = document.querySelector("#before-date");
-//beforeDate.addEventListener("click", dateCheck, afterDate);
-//afterDate.addEventListener("click", dateCheck, beforeDate);
 
+//Denna validerar datumsökningen. Kollar så inte bryggt före är ett äldre datum än bryggt efter. Kollar också så att bryggd före inte är tom.
 function dateCheck(evt) {
-  debugger;
   console.log(evt);
   if (
-    evt.target[3].value > evt.target[4].value ||
-    evt.target[5].value > evt.target[6].value
+    (evt.target[4].value !== "" && evt.target[3].value > evt.target[4].value) ||
+    (evt.target[6].value !== "" && evt.target[5].value > evt.target[6].value)
   ) {
-    alert("Kolla så siffrorna stämmer");
+    alert(
+      "Se till att: x Bryggt före inte är ett äldre datum än bryggt efter.<br>x Att alk.procent lägre än är en mindre siffra än alk.procent högre än"
+    );
     return false;
   }
   return true;
 }
-function reverseDate() {}
+//Denna gör om formatet på datumet från YYYY-MM till MM-YYYY som den behöver va i urlen
+function reverseDate(evt) {
+  let split = evt.target[i].value.split("-");
+  let newDate = split[1] + "-" + split[0];
+  urlAdd += evt.target[i].alt + newDate;
+}
 
+//Styr vad som händer när man trycker Submit
 function onSubmit(evt) {
   if (dateCheck(evt) !== false) {
     urlAdd = "&per_page=10";
@@ -40,7 +46,7 @@ function onSubmit(evt) {
       if (evt.target[i].value == "") {
         continue;
       } else if (i == 3 || i == 4) {
-        //FIXA SÅ MONTH O YEAR KASTAS OM
+        reverseDate(evt);
       } else {
         urlAdd += evt.target[i].alt + evt.target[i].value;
       }
@@ -51,6 +57,7 @@ function onSubmit(evt) {
   }
 }
 
+//Hämta data från punk API
 function getData(url, callback) {
   fetch(url)
     .then((res) => res.json())
