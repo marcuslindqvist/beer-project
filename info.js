@@ -9,8 +9,8 @@ class Beer {
   constructor(öl) {
     this.Name = öl.name;
     this.Description = öl.description;
-    this.Food_Pairing = this.concatArr(öl.food_pairing);
     this.Brewers_tips = öl.brewers_tips + " Av: " + öl.contributed_by;
+    this.Food_Pairing = this.concatArr(öl.food_pairing);
     this.Percentage = öl.abv + " %";
     this.Volume = öl.volume.value + " " + öl.volume.unit;
     this.Hops = this.concatObj(öl.ingredients.hops);
@@ -66,6 +66,8 @@ class Control {
 
   printer(objekt, egenskap, pCreator, createImg) {
     const valueOfProperty = objekt[egenskap];
+    let rubrikClass = "rubrikClass";
+    let hopsmalt = "groupP";
     if (egenskap == "Bild_url") {
       createImg(valueOfProperty);
     } else if (
@@ -73,19 +75,21 @@ class Control {
       egenskap == "Malt" ||
       egenskap == "Food_Pairing"
     ) {
-      debugger;
       let str = `${egenskap}: `;
       str = str.replace("_", " ");
-      pCreator(str);
-      let hopsmalt = "groupP";
+      pCreator(str, rubrikClass);
+
       for (let i = 0; i < objekt[egenskap].length; i++) {
         str = `${valueOfProperty[i]}`;
         pCreator(str, hopsmalt);
       }
     } else {
-      let str = egenskap + ": " + valueOfProperty;
-      str = str.replace("_", " ");
-      pCreator(str);
+      debugger;
+      let rubrik = egenskap + ": ";
+      rubrik = rubrik.replace("_", " ");
+      pCreator(rubrik, rubrikClass);
+      let str = valueOfProperty;
+      pCreator(str, hopsmalt);
     }
   }
 

@@ -78,6 +78,15 @@ column-count: 2;
 column-gap: 30px;
 }
 
+.groupP{
+    margin: 0px;
+}
+
+.rubrikClass{
+margin-bottom: 0px;
+font-weight: 500;
+}
+
 section.main {
     grid-row: 1/ span 3;
 /*     grid-column: 2;
@@ -153,12 +162,4 @@ div.tabs {
     z-index: 15;
     width: 60px;
     height: 160px;
-}
-
-/* styling för infon om ölen */
-.info-paragraphs > p:first-child {
-
-    margin-top: 0;
-    font-size: 18px;
-    font-weight: 500;
 }
