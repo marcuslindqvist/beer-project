@@ -57,6 +57,15 @@ function onSubmit(evt) {
   }
 }
 
+function cache(url, evt) {
+  let cacheName = "saveSearch";
+  debugger;
+  caches.open(cacheName).then((cache) => {
+    cache.addAll(url).then(() => {
+      console.log("Data cached ");
+    });
+  });
+}
 //Hämta data från punk API
 function getData(url, callback) {
   fetch(url)
@@ -108,6 +117,7 @@ next.onclick = function (evt) {
   if (ulElement.childElementCount == 10) {
     url = api + (currentPage + 1) + urlAdd;
     getData(url, render);
+    cache(url);
     evt.preventDefault();
     currentPage++;
     pageCount.innerHTML = currentPage;
