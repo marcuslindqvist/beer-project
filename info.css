@@ -1,3 +1,8 @@
+* {
+
+    transition: 300ms;
+}
+
 :root {
 
     font-family: 'Khand', sans-serif;
@@ -52,7 +57,7 @@ header {
 } */
 
 main{
-    background-color: #e9d8d8;
+    background-color: #FFCACA;
     display: grid;
     grid-template-columns: 1fr 1fr;
     /* grid-template-rows: repeat(3, 150px); */
@@ -61,6 +66,8 @@ main{
     padding: 50px;
     border-radius: 10px;
     border-top-right-radius: 0;
+    box-shadow: 10px 5px 50px #c1c1c1;
+    position: relative;
 }
 
 section.info-paragraphs{
@@ -141,13 +148,14 @@ div.tabs {
 }
 
 .infoTab {
-    background-color: #e9d8d8;
+    background-color: #FFCACA;
     margin-top: -30px;
     z-index: 15;
     width: 60px;
     height: 160px;
 }
 
+/* styling för infon om ölen */
 .info-paragraphs > p:first-child {
 
     margin-top: 0;
