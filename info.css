@@ -1,12 +1,30 @@
+:root {
+
+    font-family: 'Khand', sans-serif;
+}
+
+a {
+    text-decoration: none;
+    color: black;
+}
+
 div.pages {
     display: flex;
 }
 
-body {
+/* body {
     background-color: #ECEBEB;
     display: grid;
     grid-template-columns: 1fr 3fr 1fr;
     grid-template-rows: repeat(7, 150px);
+} */
+
+body{
+    background-color: #ECEBEB;
+    display: grid;
+/*     grid-template-columns: 1fr 3fr 1fr;
+ */    /* grid-template-rows: repeat(7, 200px); */
+    grid-template-columns: 1fr 730px 70px 1fr;
 }
 
 div.wrapper {
@@ -20,7 +38,7 @@ header {
     border-radius: 10px;
 }
 
-main {
+/* main {
     background-color: #e9d8d8;
     display: grid;
     grid-template-columns: 1fr 1fr;
@@ -28,23 +46,39 @@ main {
     gap: 50px;
     padding: 50px;
     border-radius: 10px;
+} */
+
+main{
+    background-color: #e9d8d8;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    /* grid-template-rows: repeat(3, 150px); */
+    grid-template-rows: 493.5px;
+    /* row-gap: 25px; */
+    padding: 50px;
+    border-radius: 10px;
+    border-top-right-radius: 0;
 }
+
 section.info-paragraphs{
 grid-row: 1/5;
-grid-column: 1;
+grid-column: 1 / 3;
+font-size: 14px;
+column-count: 2;
+column-gap: 30px;
 }
 
 
 section.main {
     grid-row: 1/ span 3;
-    grid-column: 2;
-    border-radius: 5px;
-    background-image: url(media/yellowflask.png);
+/*     grid-column: 2;
+ */    border-radius: 5px;
+    /* background-image: url(media/yellowflask.png);
     background-repeat: no-repeat;
-    background-size: 80%;
+    background-size: 80%; */
     display: flex;
     justify-content: center;
-    align-items: center;
+    align-items: flex-end;
 }
 body>div.wrapper>main>section>div>img{
     object-fit: cover;
@@ -67,7 +101,7 @@ div.tabs {
     border-bottom-right-radius: 10px;
 }
 
-.tabs .indexTab {
+/* .tabs .indexTab {
     margin-top: 140px;
     background-color: white;
     z-index: 10;
@@ -78,6 +112,31 @@ div.tabs {
     margin-top: -30px;
     z-index: 12;
  
+}
+
+.infoTab {
+    background-color: #e9d8d8;
+    margin-top: -30px;
+    z-index: 15;
+    width: 60px;
+    height: 160px;
+} */
+
+.tabs .indexTab{
+    /* margin-top: 140px; */
+    margin-top: 120px;
+    background-color: white;
+    z-index: 10;
+    /* width: 60px;
+    height: 160px; */
+}
+
+.searchTab {
+    background-color:#bde6f3;
+    margin-top: -30px;
+    z-index: 12;
+    /* width: 60px;
+    height: 160px; */
 }
 
 .infoTab {
