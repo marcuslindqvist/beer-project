@@ -5,42 +5,40 @@ const id = searchParams.get("name");
 const page = `${api}/${id}`;
 
 //getData(page, control);
-
 class Beer {
   constructor(öl) {
-    this.Namn = öl.name;
-    this.Beskrivning = öl.description;
-    this.Bild_url = öl.image_url;
-    this.Alkoholhalt = öl.abv + " %";
-    this.Volym = öl.volume.value + " " + öl.volume.unit;
-    this.Humle = this.concatObj(öl.ingredients.hops);
+    this.Name = öl.name;
+    this.Description = öl.description;
+    this.Food_Pairing = this.concatArr(öl.food_pairing);
+    this.Brewers_tips = öl.brewers_tips + " Av: " + öl.contributed_by;
+    this.Percentage = öl.abv + " %";
+    this.Volume = öl.volume.value + " " + öl.volume.unit;
+    this.Hops = this.concatObj(öl.ingredients.hops);
     this.Malt = this.concatObj(öl.ingredients.malt);
-    this.Jäst = öl.ingredients.yeast;
-    this.Mat_tips = this.concatArr(öl.food_pairing);
-    this.Brygg_tips = öl.brewers_tips + " Av: " + öl.contributed_by;
+    this.Yeast = öl.ingredients.yeast;
+    this.Bild_url = öl.image_url;
   }
   concatObj(råvara) {
-    let totalRåvara = "";
+    let totalRåvara = [];
     for (const p in råvara) {
       let amount = råvara[p].amount.value + " " + råvara[p].amount.unit + " ";
-      totalRåvara += amount + råvara[p].name + ", ";
+      totalRåvara.push(amount + råvara[p].name);
     }
-    totalRåvara = totalRåvara.slice(0, -2) + ".";
+    //totalRåvara = totalRåvara.slice(0, -2) + ".";
     return totalRåvara;
   }
 
   concatArr(råvara) {
     let tipsLista = [];
     råvara.forEach((element) => {
-      tipsLista += element + ", ";
+      tipsLista.push(element);
     });
-    tipsLista = tipsLista.slice(0, -2) + ".";
     return tipsLista;
   }
 
-  throw(obj, printer, pCreator, createImg) {
+  throw(obj, printer, pCreator, createImg, arrayLoop) {
     for (const property in obj) {
-      printer(obj, property, pCreator, createImg);
+      printer(obj, property, pCreator, createImg, arrayLoop);
     }
   }
 }
@@ -57,29 +55,49 @@ class Control {
 
   eventMaker(data) {
     const beer = new Beer(data[0]);
-    beer.throw(beer, this.printer, this.pCreator, this.createImg);
+    beer.throw(
+      beer,
+      this.printer,
+      this.pCreator,
+      this.createImg,
+      this.arrayLoop
+    );
   }
 
   printer(objekt, egenskap, pCreator, createImg) {
     const valueOfProperty = objekt[egenskap];
-
     if (egenskap == "Bild_url") {
       createImg(valueOfProperty);
+    } else if (
+      egenskap == "Hops" ||
+      egenskap == "Malt" ||
+      egenskap == "Food_Pairing"
+    ) {
+      debugger;
+      let str = `${egenskap}: `;
+      str = str.replace("_", " ");
+      pCreator(str);
+      let hopsmalt = "groupP";
+      for (let i = 0; i < objekt[egenskap].length; i++) {
+        str = `${valueOfProperty[i]}`;
+        pCreator(str, hopsmalt);
+      }
     } else {
-      let str = `${egenskap}: ${valueOfProperty}`;
+      let str = egenskap + ": " + valueOfProperty;
+      str = str.replace("_", " ");
       pCreator(str);
     }
   }
 
-  pCreator(key) {
+  pCreator(key, className) {
     let pElement = document.createElement("p");
+    pElement.classList.add(className);
     let pContent = document.createTextNode(key);
     pElement.appendChild(pContent);
     infoHolder.appendChild(pElement);
   }
 
   createImg(url) {
-    debugger;
     let imgHolder = document.querySelector(".beer-info-img");
     let imgElement = document.createElement("img");
     if (url == null) {
