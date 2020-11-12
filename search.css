@@ -1,6 +1,6 @@
 * {
 
-    transition: 300ms;
+    transition: 200ms;
 }
 
 :root {
@@ -212,4 +212,9 @@ input.submit {
 input.submit:hover {
 
 background-color: #FFCACA; ;
+}
+
+input.submit:active {
+    
+background-color: #ffa0a0;
 }

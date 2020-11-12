@@ -2,13 +2,14 @@
 
 * {
 
-    transition: 300ms;
-}
-
-:root {
-
+    transition: 200ms;
     font-family: 'Khand', sans-serif;
 }
+
+/* :root {
+
+    font-family: 'Khand', sans-serif;
+} */
 
 a {
     text-decoration: none;
@@ -28,32 +29,24 @@ body{
 
 div.wrapper{
     grid-column: 2;
-    grid-row: 2 / 3;
-}
-
-header{
-    background-color: #ECEBEB;
-    height: 80px;
-    margin-bottom: 40px;
-    border-radius: 10px;
+    grid-row: 2;
 }
 
 main{
     background-color: white;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    /* grid-template-rows: repeat(3, 150px); */
+    /* ska de va auto? */
     grid-template-rows: auto;
     column-gap: 50px;
-    /* row-gap: 25px; */
     padding: 50px;
-    border-radius: 10px;
-    border-top-right-radius: 0;
-    box-shadow: 10px 5px 50px #c1c1c1;
+    border-radius: 10px 0px 10px 10px;
+    box-shadow: 10px 10px 50px #c1c1c1;
     position: relative;
 }
 
-section.random-box{
+section.random-box {
+    /* inga grid row specsade i main grid? */
     grid-row: 1;
     text-align: center;
 }
@@ -79,6 +72,11 @@ section.random-box > button {
 section.random-box > button:hover {
 
     background-color: #FFCACA;
+}
+
+section.random-box > button:active {
+
+    background-color: #ffa0a0;
 }
 
 section.beer-info-box{
@@ -115,6 +113,11 @@ section.beer-info-box > p {
 section.beer-info-box > p:hover {
 
     color: #bde6f3;
+}
+
+section.beer-info-box > p:active {
+
+    color: #4bc8ee;
 }
 
 /* .beer-info-img{
