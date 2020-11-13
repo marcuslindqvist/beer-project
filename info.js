@@ -98,7 +98,7 @@ class Control {
     let imgHolder = document.querySelector(".beer-info-img");
     let imgElement = document.createElement("img");
     if (url == null) {
-      url = "media/black-beer-flask-lores.png";
+      url = "normalflask.png";
     }
     imgElement.src = url;
     imgElement.height = 150; //set atributes like height, width mm.

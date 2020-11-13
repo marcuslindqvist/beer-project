@@ -34,7 +34,7 @@ function renderBeerInfo(data) {
   if (beer.image_url) {
     image = beer.image_url;
   } else {
-    image = "media/black-beer-flask-lores.png";
+    image = "normalflask.png";
   }
   beerInfoImage.src = image;
 }
