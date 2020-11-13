@@ -3,14 +3,13 @@ const searchParams = new URLSearchParams(window.location.search);
 const api = "https://api.punkapi.com/v2/beers";
 const id = searchParams.get("name");
 const page = `${api}/${id}`;
-//getData(page, control);
 
 class Beer {
   constructor(öl) {
     this.Name = öl.name;
     this.Description = öl.description;
     this.Brewers_tips = öl.brewers_tips + " Av: " + öl.contributed_by;
-    this.Food_Pairing = this.concatArr(öl.food_pairing);
+    this.Food_Pairing = öl.food_pairing;
     this.Percentage = öl.abv + " %";
     this.Volume = öl.volume.value + " " + öl.volume.unit;
     this.Hops = this.concatObj(öl.ingredients.hops);
@@ -18,24 +17,17 @@ class Beer {
     this.Yeast = öl.ingredients.yeast;
     this.Bild_url = öl.image_url;
   }
+  //Gör om hops och malt-objekten till arrays
   concatObj(råvara) {
     let totalRåvara = [];
     for (const p in råvara) {
       let amount = råvara[p].amount.value + " " + råvara[p].amount.unit + " ";
       totalRåvara.push(amount + råvara[p].name);
     }
-    //totalRåvara = totalRåvara.slice(0, -2) + ".";
     return totalRåvara;
   }
 
-  concatArr(råvara) {
-    let tipsLista = [];
-    råvara.forEach((element) => {
-      tipsLista.push(element);
-    });
-    return tipsLista;
-  }
-
+  //Loopar properties och skickar till printer för utskrift på sidan
   throw(obj, printer, pCreator, createImg, arrayLoop) {
     for (const property in obj) {
       printer(obj, property, pCreator, createImg, arrayLoop);
@@ -43,6 +35,7 @@ class Beer {
   }
 }
 
+//Klass som hanterar det mesta som händer på sidan
 class Control {
   constructor(url) {
     fetch(url)
@@ -52,7 +45,7 @@ class Control {
       })
       .catch((error) => console.log(error));
   }
-
+  //Skapar nytt objekt av aktuell öl
   eventMaker(data) {
     const beer = new Beer(data[0]);
     beer.throw(
@@ -63,7 +56,7 @@ class Control {
       this.arrayLoop
     );
   }
-
+  //Startar utskrift av information på sidan
   printer(objekt, egenskap, pCreator, createImg) {
     const valueOfProperty = objekt[egenskap];
     let rubrikClass = "rubrikClass";
@@ -92,6 +85,7 @@ class Control {
     }
   }
 
+  //Skapar upp paragrafer
   pCreator(key, className) {
     let pElement = document.createElement("p");
     pElement.classList.add(className);
@@ -99,7 +93,7 @@ class Control {
     pElement.appendChild(pContent);
     infoHolder.appendChild(pElement);
   }
-
+  //Skapar upp bilder utifrån url om det finns, annars default-bild
   createImg(url) {
     let imgHolder = document.querySelector(".beer-info-img");
     let imgElement = document.createElement("img");

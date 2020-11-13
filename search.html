@@ -1,13 +1,10 @@
-<!-- form kalender, datum sökning fungerar ej! -->
-
-
 <!DOCTYPE html>
 <html lang="en">
 
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Beerpedia - search page</title>
     <script src="search.js" defer></script>
     <link rel="stylesheet" href="search.css">
     <link href="https://fonts.googleapis.com/css2?family=Khand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
@@ -19,27 +16,28 @@
         <main>
             <section class="form-container">
                 <form>
-                    <label for="beerElement">Sök ölnamn:</label>
+                    <label class="searchName">Search</label>
+                    <label for="beerElement">Beer name:</label>
                     <input type="text" name="beerElement" alt="&beer_name=">
 
-                    <label for="hopsElement">Sök hops:</label>
+                    <label for="hopsElement">Hops:</label>
                     <input type="text" name="hopsElement" alt="&hops=">
 
-                    <label for="maltElement">Sök malt:</label>
+                    <label for="maltElement">Malt:</label>
                     <input type="text" name="maltElement" alt="&malt=">
 
-                    <label for="brewed-after">Bryggt efter:</label>
+                    <label for="brewed-after">Brewed after:</label>
                     <input type="month" id="after-date" name="after-date" alt="&brewed_after=">
 
-                    <label for="brewed-before">Bryggt innan: </label>
+                    <label for="brewed-before">Brewed before:</label>
                     <input type="month" id="before-date" name="before-date" alt="&brewed_before=">
 
-                    <label for="abv-over">Alkoholhalt över (%):</label>
+                    <label for="abv-over">Alcohole by volume, greater than:</label>
                     <input type="number" id="abv-over" name="alkoholhalt" alt="&abv_gt=" min="0">
 
-                    <label for="abv-under">Alkoholhalt under (%):</label>
+                    <label for="abv-under">Alcohole by volume, less than:</label>
                     <input type="number" id="abv-under" name="alkoholhalt" alt="&abv_lt=">
-                    
+
                     <input class="submit" type="submit" value="Submit">
                 </form>
             </section>

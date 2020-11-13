@@ -10,14 +10,12 @@ const next = document.querySelector("#next");
 let ulElement = document.querySelector(
   "body > div.wrapper > main > section > div.beer-info-img > ul"
 );
+ulElement.addEventListener("click", onUlClicked);
 
 let pageCount = document.querySelector("#current");
 pageCount.innerHTML = "";
 
 formElement.addEventListener("submit", onSubmit);
-
-//let afterDate = document.querySelector("#after-date");
-//let beforeDate = document.querySelector("#before-date");
 
 let cache = [];
 
@@ -28,7 +26,7 @@ function dateCheck(evt) {
     (evt.target[6].value !== "" && evt.target[5].value > evt.target[6].value)
   ) {
     alert(
-      "Se till att: Bryggt före inte är ett äldre datum än bryggt efter. Att alk.procent lägre än är en mindre siffra än alk.procent högre än."
+      "Se till att: Bryggt före < bryggt efter. Att alk.procent lägre än < alk.procent högre än!"
     );
     return false;
   }
@@ -72,13 +70,12 @@ function getData(url, callback) {
     })
     .catch((error) => console.log(error));
 }
-
+//Skapar upp objekt
 function render(data) {
+  //Tar bort existerande listobjekt
   while (ulElement.firstChild) {
     ulElement.removeChild(ulElement.firstChild);
   }
-
-  ulElement.addEventListener("click", onUlClicked);
 
   for (let i = 0; i < data.length; i++) {
     const beer = data[i];
@@ -132,6 +129,7 @@ next.onclick = function (evt) {
   }
 };
 
+//Kollar ifall önskad sida är cachad
 function checkCache() {
   for (i = 0; i < cache.length; i++) {
     if (currentPage == i + 1) {
