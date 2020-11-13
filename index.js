@@ -7,7 +7,6 @@ let beerInfoImage = document.querySelector(
   "body > div.wrapper > main > section.beer-info-box > div > img"
 );
 let moreInfoTag = document.querySelector("p.beer-info-more");
-let infoTab = document.querySelector(".indexTab");
 let beerID;
 
 getData(api, renderBeerInfo);
@@ -15,11 +14,11 @@ getData(api, renderBeerInfo);
 onBtn.addEventListener("click", randomButton);
 
 moreInfoTag.addEventListener("click", moreInfoClicked);
-infoTab.addEventListener("click", moreInfoClicked);
 
 function randomButton() {
   getData(api, renderBeerInfo);
 }
+
 function getData(url, callback) {
   fetch(url)
     .then((res) => res.json())
@@ -45,7 +44,6 @@ function renderBeerInfo(data) {
 }
 
 function moreInfoClicked(evt) {
-  debugger;
   const url = `info.html?name=${beerID}`;
   document.location.href = url;
 }

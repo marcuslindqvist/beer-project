@@ -84,7 +84,6 @@ class Control {
         pCreator(str, hopsmalt);
       }
     } else {
-      debugger;
       let rubrik = egenskap + ": ";
       rubrik = rubrik.replace("_", " ");
       pCreator(rubrik, rubrikClass);
