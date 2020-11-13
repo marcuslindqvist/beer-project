@@ -3,8 +3,8 @@ const searchParams = new URLSearchParams(window.location.search);
 const api = "https://api.punkapi.com/v2/beers";
 const id = searchParams.get("name");
 const page = `${api}/${id}`;
-
 //getData(page, control);
+
 class Beer {
   constructor(öl) {
     this.Name = öl.name;

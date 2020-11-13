@@ -1,13 +1,11 @@
 let api = "https://api.punkapi.com/v2/beers/random";
-let formElement = document.querySelector("form");
-let mainElement = document.querySelector("div.main");
+//let formElement = document.querySelector("form");
+//let mainElement = document.querySelector("div.main");
 let onBtn = document.querySelector("button.random");
 let beerInfoName = document.querySelector("p.beer-info-name");
-let beerInfoImage = document.querySelector(
-  "body > div.wrapper > main > section.beer-info-box > div > img"
-);
+let beerInfoImage = document.querySelector("div.beer-info-img > img");
 let moreInfoTag = document.querySelector("p.beer-info-more");
-let beerID;
+let beerID; //måste den va här??
 
 getData(api, renderBeerInfo);
 
@@ -20,6 +18,7 @@ function randomButton() {
 }
 
 function getData(url, callback) {
+  debugger;
   fetch(url)
     .then((res) => res.json())
     .then((data) => {

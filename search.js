@@ -10,22 +10,25 @@ const next = document.querySelector("#next");
 let ulElement = document.querySelector(
   "body > div.wrapper > main > section > div.beer-info-img > ul"
 );
+
 let pageCount = document.querySelector("#current");
 pageCount.innerHTML = "";
+
 formElement.addEventListener("submit", onSubmit);
 
-let afterDate = document.querySelector("#after-date");
-let beforeDate = document.querySelector("#before-date");
+//let afterDate = document.querySelector("#after-date");
+//let beforeDate = document.querySelector("#before-date");
+
+let cache = [];
 
 //Denna validerar datumsökningen. Kollar så inte bryggt före är ett äldre datum än bryggt efter. Kollar också så att bryggd före inte är tom.
 function dateCheck(evt) {
-  console.log(evt);
   if (
     (evt.target[4].value !== "" && evt.target[3].value > evt.target[4].value) ||
     (evt.target[6].value !== "" && evt.target[5].value > evt.target[6].value)
   ) {
     alert(
-      "Se till att: x Bryggt före inte är ett äldre datum än bryggt efter.<br>x Att alk.procent lägre än är en mindre siffra än alk.procent högre än"
+      "Se till att: Bryggt före inte är ett äldre datum än bryggt efter. Att alk.procent lägre än är en mindre siffra än alk.procent högre än."
     );
     return false;
   }
@@ -40,6 +43,8 @@ function reverseDate(evt) {
 
 //Styr vad som händer när man trycker Submit
 function onSubmit(evt) {
+  currentPage = 1;
+  cache = [];
   if (dateCheck(evt) !== false) {
     urlAdd = "&per_page=10";
     for (i = 0; i < evt.target.length - 1; i++) {
@@ -57,19 +62,12 @@ function onSubmit(evt) {
   }
 }
 
-function cache(url, evt) {
-  let cacheName = "saveSearch";
-  caches.open(cacheName).then((cache) => {
-    cache.addAll(url).then(() => {
-      console.log("Data cached ");
-    });
-  });
-}
 //Hämta data från punk API
 function getData(url, callback) {
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
+      cache.push(data);
       callback(data);
     })
     .catch((error) => console.log(error));
@@ -79,6 +77,7 @@ function render(data) {
   while (ulElement.firstChild) {
     ulElement.removeChild(ulElement.firstChild);
   }
+
   ulElement.addEventListener("click", onUlClicked);
 
   for (let i = 0; i < data.length; i++) {
@@ -89,6 +88,7 @@ function render(data) {
     liElement.textContent = beer.name;
     ulElement.appendChild(liElement);
   }
+  pageCount.innerHTML = currentPage;
   mainElement.appendChild(ulElement);
 }
 
@@ -99,26 +99,44 @@ function onUlClicked(evt) {
   document.location.href = url;
 }
 
-//bläddra sida bakåt
+//bläddra bakåt
 previous.onclick = function (evt) {
   if (currentPage !== 1) {
     url = api + (currentPage - 1) + urlAdd;
-    getData(url, render);
-    evt.preventDefault();
     currentPage--;
+    let cacheResult = checkCache();
+    if (cacheResult) {
+      render(cacheResult);
+    } else {
+      getData(url, render);
+    }
+    evt.preventDefault();
     pageCount.innerHTML = currentPage;
   }
 };
 
-//bläddra sida framåt
+//bläddra framåt
 next.onclick = function (evt) {
   //förhindrar att man bläddrar förbi sista sidan
   if (ulElement.childElementCount == 10) {
     url = api + (currentPage + 1) + urlAdd;
-    getData(url, render);
-    cache(url);
-    evt.preventDefault();
     currentPage++;
+    let cacheResult = checkCache();
+    if (cacheResult) {
+      render(cacheResult);
+    } else {
+      getData(url, render);
+    }
+    evt.preventDefault();
     pageCount.innerHTML = currentPage;
   }
 };
+
+function checkCache() {
+  for (i = 0; i < cache.length; i++) {
+    if (currentPage == i + 1) {
+      console.log(cache[i]);
+      return cache[i];
+    }
+  }
+}
