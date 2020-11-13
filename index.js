@@ -16,7 +16,6 @@ function randomButton() {
 }
 
 function getData(url, callback) {
-  debugger;
   fetch(url)
     .then((res) => res.json())
     .then((data) => {
