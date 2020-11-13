@@ -18,6 +18,7 @@ moreInfoTag.addEventListener("click", moreInfoClicked);
 function randomButton() {
   getData(api, renderBeerInfo);
 }
+
 function getData(url, callback) {
   fetch(url)
     .then((res) => res.json())

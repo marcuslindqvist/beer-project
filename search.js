@@ -59,7 +59,6 @@ function onSubmit(evt) {
 
 function cache(url, evt) {
   let cacheName = "saveSearch";
-  debugger;
   caches.open(cacheName).then((cache) => {
     cache.addAll(url).then(() => {
       console.log("Data cached ");
